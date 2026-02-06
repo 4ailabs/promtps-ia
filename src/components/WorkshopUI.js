@@ -33,28 +33,16 @@ import { workshopContent } from '@/data/workshopContent';
 const WorkshopUI = () => {
     const [activeModuleId, setActiveModuleId] = useState('home');
     const [searchTerm, setSearchTerm] = useState('');
-
     const [copiedId, setCopiedId] = useState(null);
 
     const activeModule = workshopContent.modules.find(m => m.id === activeModuleId) || workshopContent.modules[0];
+
     const iconMap = {
-        Target,
-        Mail,
-        Lightbulb,
-        GraduationCap,
-        Theater,
-        Brain,
-        Repeat,
-        Wand2,
-        Copy,
-        Brackets,
-        ClipboardList,
-        Workflow,
-        MessageSquare,
-        Megaphone,
-        FileText,
-        CalendarCheck
+        Target, Mail, Lightbulb, GraduationCap, Theater, Brain, Repeat,
+        Wand2, Copy, Brackets, ClipboardList, Workflow, MessageSquare,
+        Megaphone, FileText, CalendarCheck
     };
+
     const moduleIcons = {
         intro: Target,
         fundamentals: ClipboardList,
@@ -63,22 +51,13 @@ const WorkshopUI = () => {
         templates: Mail,
         challenge: CalendarCheck
     };
+
     const categoryStyles = {
-        Consultoría: 'badge-amber',
-        Marketing: 'badge-rose',
-        Negocios: 'badge-emerald',
-        Servicio: 'badge-sky',
-        Operaciones: 'badge-teal',
-        Ventas: 'badge-violet',
-        Legal: 'badge-slate',
-        PR: 'badge-pink',
-        Educación: 'badge-emerald',
-        Comunicación: 'badge-sky',
-        Aprendizaje: 'badge-amber',
-        Hogar: 'badge-teal',
-        Bienestar: 'badge-rose',
-        Creatividad: 'badge-violet',
-        Presentación: 'badge-pink',
+        Consultoría: 'badge-amber', Marketing: 'badge-rose', Negocios: 'badge-emerald',
+        Servicio: 'badge-sky', Operaciones: 'badge-teal', Ventas: 'badge-violet',
+        Legal: 'badge-slate', PR: 'badge-pink', Educación: 'badge-emerald',
+        Comunicación: 'badge-sky', Aprendizaje: 'badge-amber', Hogar: 'badge-teal',
+        Bienestar: 'badge-rose', Creatividad: 'badge-violet', Presentación: 'badge-pink',
         Finanzas: 'badge-slate'
     };
 
@@ -89,266 +68,300 @@ const WorkshopUI = () => {
     };
 
     return (
-        <div className="layout">
+        <div className="layout-root">
             <div className="bg-gradient"></div>
 
-            {/* Sidebar */}
-            <aside className="sidebar">
-                <div onClick={() => setActiveModuleId('home')} style={{ cursor: 'pointer' }}>
-                    <h1 className="sidebar-title">Taller 4ailabs</h1>
-                </div>
-                <nav className="flex-1">
-                    <div
-                        className={`nav-link ${activeModuleId === 'home' ? 'active' : ''} slide-in`}
-                        onClick={() => setActiveModuleId('home')}
-                    >
-                        <Target size={18} />
-                        <span>Bienvenida</span>
-                    </div>
-                    {workshopContent.modules.map((module, idx) => (
-                        <div
-                            key={module.id}
-                            className={`nav-link ${activeModuleId === module.id ? 'active' : ''} slide-in`}
-                            style={{ animationDelay: `${idx * 0.1}s` }}
-                            onClick={() => setActiveModuleId(module.id)}
-                        >
-                            {(() => {
-                                const ModuleIcon = moduleIcons[module.id] || BookOpen;
-                                return <ModuleIcon size={18} />;
-                            })()}
-                            <span>{module.title}</span>
-                        </div>
-                    ))}
-                    <div className="nav-link" onClick={() => setActiveModuleId('gallery')}>
-                        <Search size={18} />
-                        <span>Galería de instrucciones</span>
-                    </div>
-                </nav>
-
-                <div className="sidebar-footer">
-                    <div className="credit-item">
-                        <User size={14} className="text-accent-primary" />
-                        <span>Dr. Miguel Ojeda Rios</span>
-                    </div>
-                    <a href="tel:5579077726" className="credit-item hover:text-accent-secondary transition-colors">
-                        <Phone size={14} className="text-accent-secondary" />
-                        <span>55 79 07 7726</span>
-                    </a>
-                </div>
-            </aside>
-
-            {/* Main Content */}
-            <main className="main-content">
-                {activeModuleId === 'home' && (
-                    <div className="fade-in home-section">
-                        <div className="hero-content mb-12">
-                            <span className="badge badge-amber mb-4">MÉXICO • 2026</span>
-                            <h1 className="text-6xl font-black mb-6">Diseño de <br /><span className="text-accent-primary">Instrucciones</span> para IA</h1>
-                            <p className="text-2xl text-secondary max-w-2xl leading-relaxed">
+            {activeModuleId === 'home' ? (
+                /* Independent Landing Page */
+                <div className="landing-wrapper fade-in">
+                    <div className="landing-container">
+                        <div className="hero-content text-center mb-16">
+                            <span className="badge badge-amber mb-6">MÉXICO • 2026</span>
+                            <h1 className="landing-title">Diseño de Instrucciones para IA</h1>
+                            <p className="landing-subtitle mx-auto">
                                 {workshopContent.welcome.text}
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                             {workshopContent.welcome.highlights.map((highlight, i) => (
-                                <div key={i} className="card concept-step slide-in" style={{ animationDelay: `${i * 0.1}s` }}>
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <Zap size={18} className="text-accent-primary" />
-                                        <span className="font-bold text-sm uppercase tracking-wider text-accent-secondary">Beneficio</span>
+                                <div key={i} className="card highlight-card slide-in" style={{ animationDelay: `${i * 0.1}s` }}>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="p-2 rounded-lg bg-accent-primary/10 text-accent-primary">
+                                            <Zap size={20} />
+                                        </div>
+                                        <span className="font-bold text-xs uppercase tracking-widest text-accent-secondary">Beneficio clave</span>
                                     </div>
-                                    <p className="text-secondary">{highlight}</p>
+                                    <p className="text-secondary leading-relaxed">{highlight}</p>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="flex gap-4 slide-in" style={{ animationDelay: '0.6s' }}>
+                        <div className="flex justify-center slide-in" style={{ animationDelay: '0.6s' }}>
                             <button
-                                className="px-8 py-4 rounded-xl bg-accent-primary text-white font-bold flex items-center gap-2 hover:bg-accent-secondary transition-all transform hover:scale-105"
+                                className="start-button"
                                 onClick={() => setActiveModuleId('intro')}
                             >
-                                Comenzar Taller <ArrowRight size={20} />
+                                Comenzar Taller <ArrowRight size={22} />
                             </button>
                         </div>
-                    </div>
-                )}
 
-                {activeModuleId === 'gallery' ? (
-                    <div className="fade-in">
-                        <h2>Galería de instrucciones</h2>
-                        <p>Explora una colección de instrucciones probadas para distintos casos de uso.</p>
-                        <div className="card">
-                            <input
-                                type="text"
-                                placeholder="Buscar instrucciones..."
-                                className="prompt-box w-full bg-transparent border-none outline-none text-white"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
+                        <footer className="landing-footer">
+                            <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 mb-6">
+                                <div className="credit-item">
+                                    <User size={18} className="text-accent-primary" />
+                                    <span className="font-medium">Dr. Miguel Ojeda Rios</span>
+                                </div>
+                                <a href="tel:5579077726" className="credit-item hover:text-accent-secondary transition-all">
+                                    <Phone size={18} className="text-accent-secondary" />
+                                    <span className="font-medium">55 79 07 7726</span>
+                                </a>
+                            </div>
+                            <div className="text-xs uppercase tracking-[0.3em] opacity-40">4ailabs • Advanced Prompt Engineering</div>
+                        </footer>
+                    </div>
+                </div>
+            ) : (
+                /* Workshop Interface with Sidebar */
+                <div className="workshop-layout">
+                    <aside className="sidebar">
+                        <div className="sidebar-header" onClick={() => setActiveModuleId('home')}>
+                            <h1 className="sidebar-title">Taller 4ailabs</h1>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {workshopContent.gallery.filter(item =>
-                                item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                item.prompt.toLowerCase().includes(searchTerm.toLowerCase())
-                            ).map((item, idx) => (
-                                <div key={idx} className="card scale-up" style={{ animationDelay: `${idx * 0.05}s` }}>
-                                    <span className={`badge ${categoryStyles[item.category] || 'badge-violet'}`}>{item.category}</span>
-                                    <h3>{item.title}</h3>
-                                    <div className="prompt-box">
-                                        <code>{item.prompt}</code>
-                                        <button
-                                            className="copy-button"
-                                            onClick={() => handleCopy(item.prompt, `gallery-${idx}`)}
-                                        >
-                                            {copiedId === `gallery-${idx}` ? <ClipboardCheck size={14} className="text-green-400" /> : <Copy size={14} />}
-                                        </button>
-                                    </div>
+
+                        <nav className="sidebar-nav">
+                            <div
+                                className={`nav-link ${activeModuleId === 'home' ? 'active' : ''}`}
+                                onClick={() => setActiveModuleId('home')}
+                            >
+                                <Target size={18} />
+                                <span>Bienvenida</span>
+                            </div>
+
+                            <div className="nav-separator">CONTENIDO</div>
+
+                            {workshopContent.modules.map((module, idx) => (
+                                <div
+                                    key={module.id}
+                                    className={`nav-link ${activeModuleId === module.id ? 'active' : ''}`}
+                                    onClick={() => setActiveModuleId(module.id)}
+                                >
+                                    {(() => {
+                                        const ModuleIcon = moduleIcons[module.id] || BookOpen;
+                                        return <ModuleIcon size={18} />;
+                                    })()}
+                                    <span>{module.title}</span>
                                 </div>
                             ))}
+
+                            <div className="nav-separator">RECURSOS</div>
+
+                            <div
+                                className={`nav-link ${activeModuleId === 'gallery' ? 'active' : ''}`}
+                                onClick={() => setActiveModuleId('gallery')}
+                            >
+                                <Search size={18} />
+                                <span>Galería de instrucciones</span>
+                            </div>
+                        </nav>
+
+                        <div className="sidebar-footer">
+                            <div className="credit-item mb-2">
+                                <User size={14} className="text-accent-primary" />
+                                <span>Dr. Miguel Ojeda Rios</span>
+                            </div>
+                            <a href="tel:5579077726" className="credit-item hover:text-accent-secondary transition-colors">
+                                <Phone size={14} className="text-accent-secondary" />
+                                <span>55 79 07 7726</span>
+                            </a>
                         </div>
-                    </div>
-                ) : (
-                    <div className="fade-in" key={activeModule.id}>
-                        <h1>{activeModule.title}</h1>
-                        <p className="text-xl mb-8 opacity-80">{activeModule.goals.join(' • ')}</p>
+                    </aside>
 
-                        {activeModule.content && activeModule.content.map((item, idx) => (
-                            <div key={idx} className="mb-12">
-                                {item.type === 'text' && (
-                                    <div className="section-block slide-in">
-                                        <p className="text-secondary leading-relaxed">{item.value}</p>
-                                    </div>
-                                )}
+                    <main className="main-content">
+                        {activeModuleId === 'gallery' ? (
+                            <div className="fade-in">
+                                <h1 className="mb-4 text-4xl">Galería de instrucciones</h1>
+                                <p className="text-xl mb-12 text-secondary">Explora una colección de instrucciones probadas para distintos casos de uso.</p>
 
-                                {item.type === 'section' && (
-                                    <div className="section-block slide-in">
-                                        <h3 className="flex items-center gap-2 mb-4">
-                                            <div className="w-2 h-2 rounded-full bg-accent-primary" />
-                                            {item.title}
-                                        </h3>
-                                        <p className="text-secondary leading-relaxed whitespace-pre-line">{item.text}</p>
-                                    </div>
-                                )}
+                                <div className="search-container mb-12">
+                                    <input
+                                        type="text"
+                                        placeholder="Buscar instrucciones por cargo, tarea o contenido..."
+                                        className="search-input"
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
+                                    <Search className="search-icon" size={20} />
+                                </div>
 
-                                {item.type === 'list' && (
-                                    <div className="section-block slide-in">
-                                        <h3 className="mb-6">{item.title}</h3>
-                                        <div className="grid gap-4">
-                                            {item.items.map((listItem, i) => (
-                                                <div key={i} className="flex gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent-primary/10 flex items-center justify-center text-accent-primary font-bold">
-                                                        {i + 1}
-                                                    </div>
-                                                    <p className="text-secondary">{listItem}</p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {item.type === 'comparison' && (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                        <div className="card border-red-500/20">
-                                            <h3 className="text-red-400 mb-4">{item.bad.title}</h3>
-                                            <div className="prompt-box border-red-500/30">
-                                                {item.bad.text}
-                                            </div>
-                                        </div>
-                                        <div className="card border-green-500/20">
-                                            <h3 className="text-green-400 mb-4">{item.good.title}</h3>
-                                            <div className="prompt-box border-green-500/30">
-                                                {item.good.text}
-                                                <button className="copy-button" onClick={() => handleCopy(item.good.text, `comp-${idx}`)}>
-                                                    {copiedId === `comp-${idx}` ? <ClipboardCheck size={14} className="text-green-400" /> : <Copy size={14} />}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    {workshopContent.gallery.filter(item =>
+                                        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                        item.prompt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                        item.category.toLowerCase().includes(searchTerm.toLowerCase())
+                                    ).map((item, idx) => (
+                                        <div key={idx} className="card gallery-card scale-up" style={{ animationDelay: `${idx * 0.05}s` }}>
+                                            <span className={`badge ${categoryStyles[item.category] || 'badge-violet'}`}>{item.category}</span>
+                                            <h3 className="mb-4 text-xl font-bold">{item.title}</h3>
+                                            <div className="prompt-box">
+                                                <code>{item.prompt}</code>
+                                                <button
+                                                    className="copy-button"
+                                                    onClick={() => handleCopy(item.prompt, `gallery-${idx}`)}
+                                                >
+                                                    {copiedId === `gallery-${idx}` ? <ClipboardCheck size={14} className="text-green-400" /> : <Copy size={14} />}
                                                 </button>
                                             </div>
                                         </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="fade-in" key={activeModule.id}>
+                                <div className="module-header mb-12">
+                                    <h1 className="mb-4">{activeModule.title}</h1>
+                                    <div className="flex flex-wrap gap-3">
+                                        {activeModule.goals.map((goal, i) => (
+                                            <span key={i} className="goal-tag">
+                                                {goal}
+                                            </span>
+                                        ))}
                                     </div>
-                                )}
+                                </div>
 
-                                {item.type === 'formula' && (
-                                    <div className="mb-20">
-                                        <div className="concept-grid">
-                                            {item.items.map((f, i) => (
-                                                <div key={i} className="concept-step slide-in" style={{ animationDelay: `${i * 0.1}s` }}>
-                                                    <span className="step-number">{f.label}</span>
-                                                    <h4 className="text-xl font-bold mb-2">{f.title || f.desc}</h4>
-                                                    <p className="text-sm text-secondary leading-relaxed">{f.desc}</p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
+                                {activeModule.content && activeModule.content.map((item, idx) => (
+                                    <div key={idx} className="content-item mb-16">
+                                        {item.type === 'text' && (
+                                            <div className="section-block slide-in">
+                                                <p className="text-secondary leading-relaxed text-lg">{item.value}</p>
+                                            </div>
+                                        )}
 
-                                {item.type === 'exercise' && (
-                                    <div className="card exercise-card slide-in">
-                                        <h3 className="flex items-center gap-4 text-accent-tertiary mb-6">
-                                            <Lightbulb size={24} />
-                                            {item.title}
-                                        </h3>
-                                        <p className="text-secondary mb-4 text-lg whitespace-pre-line">{item.instruction || item.description}</p>
-                                    </div>
-                                )}
-
-                                {item.type === 'template' && (
-                                    <div className="card scale-up">
-                                        {(() => {
-                                            const TemplateIcon = item.icon ? iconMap[item.icon] : null;
-                                            return (
-                                                <h3 className="flex items-center gap-4">
-                                                    {TemplateIcon && <TemplateIcon size={18} className="text-accent-primary" />}
+                                        {item.type === 'section' && (
+                                            <div className="section-block slide-in">
+                                                <h3 className="flex items-center gap-3 mb-6 text-2xl font-bold text-accent-tertiary">
+                                                    <div className="w-1.5 h-6 rounded-full bg-accent-primary" />
                                                     {item.title}
                                                 </h3>
-                                            );
-                                        })()}
-                                        <div className="prompt-box">
-                                            <pre className="whitespace-pre-wrap font-mono text-sm">{item.prompt}</pre>
-                                            <button className="copy-button" onClick={() => handleCopy(item.prompt, `temp-${idx}`)}>
-                                                {copiedId === `temp-${idx}` ? <ClipboardCheck size={14} className="text-green-400" /> : <Copy size={14} />}
-                                            </button>
-                                        </div>
+                                                <p className="text-secondary leading-relaxed whitespace-pre-line text-lg">{item.text}</p>
+                                            </div>
+                                        )}
+
+                                        {item.type === 'list' && (
+                                            <div className="section-block slide-in">
+                                                <h3 className="mb-8 text-xl font-bold">{item.title}</h3>
+                                                <div className="grid gap-5">
+                                                    {item.items.map((listItem, i) => (
+                                                        <div key={i} className="list-item-card">
+                                                            <div className="list-number">
+                                                                {i + 1}
+                                                            </div>
+                                                            <p className="text-secondary text-lg">{listItem}</p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {item.type === 'comparison' && (
+                                            <div className="comparison-grid mt-8">
+                                                <div className="card comparison-card bad border-red-500/10">
+                                                    <div className="vs-badge vs-bad mb-4">INCORRECTO</div>
+                                                    <h4 className="text-red-400 mb-4 font-bold">{item.bad.title}</h4>
+                                                    <div className="prompt-box prompt-box-small">
+                                                        {item.bad.text}
+                                                    </div>
+                                                </div>
+                                                <div className="card comparison-card good border-green-500/10">
+                                                    <div className="vs-badge vs-good mb-4">CORRECTO</div>
+                                                    <h4 className="text-green-400 mb-4 font-bold">{item.good.title}</h4>
+                                                    <div className="prompt-box prompt-box-small relative">
+                                                        {item.good.text}
+                                                        <button className="copy-button" onClick={() => handleCopy(item.good.text, `comp-${idx}`)}>
+                                                            {copiedId === `comp-${idx}` ? <ClipboardCheck size={14} className="text-green-400" /> : <Copy size={14} />}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {item.type === 'formula' && (
+                                            <div className="formula-section my-16">
+                                                <div className="concept-grid">
+                                                    {item.items.map((f, i) => (
+                                                        <div key={i} className="concept-step slide-in" style={{ animationDelay: `${i * 0.1}s` }}>
+                                                            <span className="step-number">{f.label}</span>
+                                                            <h4 className="text-xl font-bold mb-3">{f.title || f.desc}</h4>
+                                                            <p className="text-secondary leading-relaxed">{f.desc}</p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {item.type === 'exercise' && (
+                                            <div className="card exercise-card slide-in">
+                                                <div className="flex items-center gap-4 text-accent-tertiary mb-6">
+                                                    <div className="p-3 rounded-xl bg-accent-tertiary/10">
+                                                        <Lightbulb size={28} />
+                                                    </div>
+                                                    <h3 className="m-0 text-2xl font-bold">{item.title}</h3>
+                                                </div>
+                                                <p className="text-secondary text-xl leading-relaxed whitespace-pre-line italic opacity-90">{item.instruction || item.description}</p>
+                                            </div>
+                                        )}
+
+                                        {item.type === 'template' && (
+                                            <div className="card template-card scale-up border-accent-primary/20">
+                                                <div className="flex items-center gap-4 mb-8">
+                                                    <div className="p-3 rounded-xl bg-accent-primary/10 text-accent-primary">
+                                                        {(() => {
+                                                            const TemplateIcon = item.icon ? iconMap[item.icon] : FileText;
+                                                            return <TemplateIcon size={24} />;
+                                                        })()}
+                                                    </div>
+                                                    <h3 className="m-0 text-2xl font-bold">{item.title}</h3>
+                                                </div>
+                                                <div className="prompt-box prompt-box-large">
+                                                    <pre className="whitespace-pre-wrap font-mono text-base">{item.prompt}</pre>
+                                                    <button className="copy-button copy-button-large" onClick={() => handleCopy(item.prompt, `temp-${idx}`)}>
+                                                        {copiedId === `temp-${idx}` ? <ClipboardCheck size={18} className="text-green-400" /> : <Copy size={18} />}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+
+                                {activeModule.techniques && (
+                                    <div className="techniques-grid mt-12">
+                                        {activeModule.techniques.map((tech, idx) => (
+                                            <div key={idx} className="card technique-card scale-up" style={{ animationDelay: `${idx * 0.1}s` }}>
+                                                <div className="flex items-center gap-4 mb-6">
+                                                    <div className="p-2.5 rounded-lg bg-accent-primary/10 text-accent-primary">
+                                                        {(() => {
+                                                            const TechIcon = tech.icon ? iconMap[tech.icon] : ChevronRight;
+                                                            return <TechIcon size={20} />;
+                                                        })()}
+                                                    </div>
+                                                    <h3 className="m-0 text-xl font-bold">{tech.name}</h3>
+                                                </div>
+                                                <p className="text-secondary mb-6 leading-relaxed">{tech.desc}</p>
+                                                <div className="prompt-box relative">
+                                                    <code className="text-sm">{tech.prompt}</code>
+                                                    <button className="copy-button" onClick={() => handleCopy(tech.prompt, `tech-${idx}`)}>
+                                                        {copiedId === `tech-${idx}` ? <ClipboardCheck size={14} className="text-green-400" /> : <Copy size={14} />}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
                                 )}
                             </div>
-                        ))}
-
-                        {activeModule.techniques && (
-                            <div className="grid grid-cols-1 gap-8">
-                                {activeModule.techniques.map((tech, idx) => (
-                                    <div key={idx} className="card scale-up" style={{ animationDelay: `${idx * 0.1}s` }}>
-                                        {(() => {
-                                            const TechIcon = tech.icon ? iconMap[tech.icon] : ChevronRight;
-                                            return (
-                                                <h3 className="flex items-center gap-4">
-                                                    {TechIcon && <TechIcon size={18} className="text-accent-primary" />}
-                                                    {tech.name}
-                                                </h3>
-                                            );
-                                        })()}
-                                        <p className="my-4">{tech.desc}</p>
-                                        <div className="prompt-box">
-                                            <code className="text-sm">{tech.prompt}</code>
-                                            <button className="copy-button" onClick={() => handleCopy(tech.prompt, `tech-${idx}`)}>
-                                                {copiedId === `tech-${idx}` ? <ClipboardCheck size={14} className="text-green-400" /> : <Copy size={14} />}
-                                            </button>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
                         )}
-                    </div>
-                )}
-            </main>
-
-            <style jsx>{`
-        h3 { 
-          font-size: 1.25rem; 
-          font-weight: 600; 
-          margin-bottom: 1rem; 
-          color: var(--accent-tertiary);
-        }
-        .text-accent-primary { color: var(--accent-primary); }
-        .text-accent-secondary { color: var(--accent-secondary); }
-      `}</style>
+                    </main>
+                </div>
+            )}
         </div>
     );
 };
