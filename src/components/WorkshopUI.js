@@ -23,12 +23,15 @@ import {
     Workflow,
     Megaphone,
     FileText,
-    CalendarCheck
+    CalendarCheck,
+    User,
+    Phone,
+    ArrowRight
 } from 'lucide-react';
 import { workshopContent } from '@/data/workshopContent';
 
 const WorkshopUI = () => {
-    const [activeModuleId, setActiveModuleId] = useState('intro');
+    const [activeModuleId, setActiveModuleId] = useState('home');
     const [searchTerm, setSearchTerm] = useState('');
 
     const [copiedId, setCopiedId] = useState(null);
@@ -91,8 +94,17 @@ const WorkshopUI = () => {
 
             {/* Sidebar */}
             <aside className="sidebar">
-                <h1 className="sidebar-title">Taller 4ailabs</h1>
-                <nav>
+                <div onClick={() => setActiveModuleId('home')} style={{ cursor: 'pointer' }}>
+                    <h1 className="sidebar-title">Taller 4ailabs</h1>
+                </div>
+                <nav className="flex-1">
+                    <div
+                        className={`nav-link ${activeModuleId === 'home' ? 'active' : ''} slide-in`}
+                        onClick={() => setActiveModuleId('home')}
+                    >
+                        <Target size={18} />
+                        <span>Bienvenida</span>
+                    </div>
                     {workshopContent.modules.map((module, idx) => (
                         <div
                             key={module.id}
@@ -112,10 +124,54 @@ const WorkshopUI = () => {
                         <span>Galería de instrucciones</span>
                     </div>
                 </nav>
+
+                <div className="sidebar-footer">
+                    <div className="credit-item">
+                        <User size={14} className="text-accent-primary" />
+                        <span>Dr. Miguel Ojeda Rios</span>
+                    </div>
+                    <a href="tel:5579077726" className="credit-item hover:text-accent-secondary transition-colors">
+                        <Phone size={14} className="text-accent-secondary" />
+                        <span>55 79 07 7726</span>
+                    </a>
+                </div>
             </aside>
 
             {/* Main Content */}
             <main className="main-content">
+                {activeModuleId === 'home' && (
+                    <div className="fade-in home-section">
+                        <div className="hero-content mb-12">
+                            <span className="badge badge-amber mb-4">MÉXICO • 2026</span>
+                            <h1 className="text-6xl font-black mb-6">Diseño de <br /><span className="text-accent-primary">Instrucciones</span> para IA</h1>
+                            <p className="text-2xl text-secondary max-w-2xl leading-relaxed">
+                                {workshopContent.welcome.text}
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                            {workshopContent.welcome.highlights.map((highlight, i) => (
+                                <div key={i} className="card concept-step slide-in" style={{ animationDelay: `${i * 0.1}s` }}>
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <Zap size={18} className="text-accent-primary" />
+                                        <span className="font-bold text-sm uppercase tracking-wider text-accent-secondary">Beneficio</span>
+                                    </div>
+                                    <p className="text-secondary">{highlight}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="flex gap-4 slide-in" style={{ animationDelay: '0.6s' }}>
+                            <button
+                                className="px-8 py-4 rounded-xl bg-accent-primary text-white font-bold flex items-center gap-2 hover:bg-accent-secondary transition-all transform hover:scale-105"
+                                onClick={() => setActiveModuleId('intro')}
+                            >
+                                Comenzar Taller <ArrowRight size={20} />
+                            </button>
+                        </div>
+                    </div>
+                )}
+
                 {activeModuleId === 'gallery' ? (
                     <div className="fade-in">
                         <h2>Galería de instrucciones</h2>
