@@ -75,35 +75,32 @@ const WorkshopUI = () => {
                 /* Independent Landing Page */
                 <div className="landing-wrapper fade-in">
                     <div className="landing-container">
-                        <div className="hero-content text-center mb-16">
-                            <span className="badge badge-amber mb-6">MÉXICO • 2026</span>
-                            <h1 className="landing-title">Diseño de Instrucciones para IA</h1>
-                            <p className="landing-subtitle mx-auto">
+                        <div className="hero-content text-center mb-20">
+                            <h1 className="brand-title mb-4">4ailabs</h1>
+                            <h2 className="landing-subtitle mx-auto mb-12">
+                                Diseño de Instrucciones para IA
+                            </h2>
+                            <p className="text-secondary max-w-xl mx-auto mb-16">
                                 {workshopContent.welcome.text}
                             </p>
+
+                            <div className="flex justify-center slide-in" style={{ animationDelay: '0.6s' }}>
+                                <button
+                                    className="start-button mt-8"
+                                    onClick={() => setActiveModuleId('intro')}
+                                >
+                                    Comenzar Taller <ArrowRight size={22} />
+                                </button>
+                            </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                            {workshopContent.welcome.highlights.map((highlight, i) => (
-                                <div key={i} className="card highlight-card slide-in" style={{ animationDelay: `${i * 0.1}s` }}>
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="p-2 rounded-lg bg-accent-primary/10 text-accent-primary">
-                                            <Zap size={20} />
-                                        </div>
-                                        <span className="font-bold text-xs uppercase tracking-widest text-accent-secondary">Beneficio clave</span>
-                                    </div>
-                                    <p className="text-secondary leading-relaxed">{highlight}</p>
+                        <div className="highlight-list mb-20">
+                            {workshopContent.welcome.highlights.slice(0, 3).map((highlight, i) => (
+                                <div key={i} className="highlight-item slide-in" style={{ animationDelay: `${i * 0.1}s` }}>
+                                    <Zap size={18} className="text-accent-primary" />
+                                    <p className="text-sm text-secondary leading-relaxed">{highlight}</p>
                                 </div>
                             ))}
-                        </div>
-
-                        <div className="flex justify-center slide-in" style={{ animationDelay: '0.6s' }}>
-                            <button
-                                className="start-button"
-                                onClick={() => setActiveModuleId('intro')}
-                            >
-                                Comenzar Taller <ArrowRight size={22} />
-                            </button>
                         </div>
 
                         <footer className="landing-footer">
@@ -228,6 +225,20 @@ const WorkshopUI = () => {
                                         ))}
                                     </div>
                                 </div>
+
+                                {activeModule.id === 'intro' && (
+                                    <div className="video-section mb-16 slide-in">
+                                        <div className="video-container shadow-2xl">
+                                            <iframe
+                                                src="https://customer-qhobzy75u1p8j3tq.cloudflarestream.com/0a9ba9fd6759494a818f8bdd030390bf/iframe?poster=https%3A%2F%2Fcustomer-qhobzy75u1p8j3tq.cloudflarestream.com%2F0a9ba9fd6759494a818f8bdd030390bf%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+                                                loading="lazy"
+                                                className="absolute top-0 left-0 w-full h-full border-none rounded-2xl"
+                                                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                                allowFullScreen={true}
+                                            ></iframe>
+                                        </div>
+                                    </div>
+                                )}
 
                                 {activeModule.content && activeModule.content.map((item, idx) => (
                                     <div key={idx} className="content-item mb-16">
