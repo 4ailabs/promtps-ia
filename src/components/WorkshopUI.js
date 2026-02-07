@@ -94,6 +94,18 @@ const WorkshopUI = () => {
                             </div>
                         </div>
 
+                        {/* Integrated Video Section on Landing */}
+                        <div className="video-section mb-20 fade-in" style={{ animationDelay: '0.8s' }}>
+                            <div className="video-container">
+                                <iframe
+                                    src="https://iframe.videodelivery.net/0a9ba9fd6759494a818f8bdd030390bf"
+                                    loading="lazy"
+                                    title="Presentación del Taller"
+                                    allow="accelerometer; border-radius; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                                ></iframe>
+                            </div>
+                        </div>
+
                         <div className="highlight-list mb-20">
                             {workshopContent.welcome.highlights.slice(0, 3).map((highlight, i) => (
                                 <div key={i} className="highlight-item slide-in" style={{ animationDelay: `${i * 0.1}s` }}>
@@ -228,13 +240,12 @@ const WorkshopUI = () => {
 
                                 {activeModule.id === 'intro' && (
                                     <div className="video-section mb-16 slide-in">
-                                        <div className="video-container shadow-2xl">
+                                        <div className="video-container">
                                             <iframe
-                                                src="https://customer-qhobzy75u1p8j3tq.cloudflarestream.com/0a9ba9fd6759494a818f8bdd030390bf/iframe?poster=https%3A%2F%2Fcustomer-qhobzy75u1p8j3tq.cloudflarestream.com%2F0a9ba9fd6759494a818f8bdd030390bf%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+                                                src="https://iframe.videodelivery.net/0a9ba9fd6759494a818f8bdd030390bf"
                                                 loading="lazy"
-                                                className="absolute top-0 left-0 w-full h-full border-none rounded-2xl"
-                                                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                                allowFullScreen={true}
+                                                title="Taller de Diseño de Instrucciones - Introducción"
+                                                allow="accelerometer; border-radius; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                                             ></iframe>
                                         </div>
                                     </div>
